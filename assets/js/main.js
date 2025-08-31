@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     gsap.ticker.lagSmoothing(0);
 
-
     const cardPositions = [
         { top: "30%", left: "55%" },
         { top: "20%", left: "25%" },
@@ -17,15 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
         { top: "20%", left: "50%" },
         { top: "60%", left: "10%" },
         { top: "20%", left: "40%" },
-        { top: "45%", left: "55%" }
+        { top: "45%", left: "55%" },
     ];
-
 
     const titlesContainer = document.querySelector(".titles");
     const moveDistance = window.innerWidth * 3;
     const imagesContainer = document.querySelector(".images");
 
-    for(let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 10; i++) {
         const card = document.createElement("div");
         card.className = `card card-${i}`;
 
@@ -41,15 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
         imagesContainer.appendChild(card);
     }
 
-
     const cards = document.querySelectorAll(".card");
     cards.forEach((card, index) => {
         gsap.set(card, {
             z: -50000,
-            scale: 0
+            scale: 0,
         });
     });
-
 
     ScrollTrigger.create({
         trigger: ".sticky",
@@ -60,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         onUpdate: (self) => {
             const xPosition = -moveDistance * self.progress;
             gsap.set(titlesContainer, {
-                x:xPosition
+                x: xPosition,
             });
 
             const velocity = self.velocity;
@@ -75,13 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const title2 = titlesContainer.querySelector(".title-2");
                 const title3 = titlesContainer.querySelector(".title-3");
 
-                if(isAtEdge) {
+                if (isAtEdge) {
                     gsap.to([title1, title2], {
                         xPercent: -50,
                         x: 0,
                         duration: 0.5,
                         ease: "power2.out",
-                        overwrite: true
+                        overwrite: true,
                     });
                 } else {
                     const baseOffset = normalizedVelocity * currentSpeed;
@@ -89,26 +85,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     gsap.to(title1, {
                         xPercent: -51,
                         x: `${baseOffset * 4}px`,
+                        y: "-3px",
                         duration: 0.2,
                         ease: "power1.out",
-                        overwrite: "auto"
+                        overwrite: "auto",
                     });
 
                     gsap.to(title2, {
-                      xPercent: -53,
-                      x: `${baseOffset * 2}px`,
-                      duration: 0.2,
-                      ease: "power1.out",
-                      overwrite: "auto",
+                        xPercent: -53,
+                        x: `${baseOffset * 2}px`,
+                        y: "-4px",
+                        duration: 0.2,
+                        ease: "power1.out",
+                        overwrite: "auto",
                     });
                 }
 
                 gsap.set(title3, {
                     xPercent: -50,
-                    x: 0
+                    x: 0,
                 });
             });
-
 
             cards.forEach((card, index) => {
                 const staggerOffset = index * 0.075;
@@ -121,30 +118,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 gsap.set(card, {
                     z: newZ,
-                    scale: scale
+                    scale: scale,
                 });
             });
-        }
+        },
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
